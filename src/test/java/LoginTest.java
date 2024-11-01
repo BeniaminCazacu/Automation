@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -61,20 +62,52 @@ public class LoginTest extends Hooks {
         assertEquals(loginPage.getUserLoggedIn().getText(), "dino");
     }
 
-    @Test(description = "Sorting test")
-    public void sortTest() throws InterruptedException {
+    @Test(description = "Sorting test (Z to A)")
+    public void sortTest1() throws InterruptedException {
         List<WebElement> productElements = loginPage.getProductElements();
         List<String> actualProductNames = new ArrayList<>();
-        loginPage.selectOption(loginPage.getSortBar(), "Sort by price (low to high)");
+        loginPage.selectOption(loginPage.getSortBar(), "Sort by name (Z to A)");
         Thread.sleep(5000);
         for(WebElement productElement : productElements) {
             actualProductNames.add(productElement.getText());
         }
-
         List<String> expectedProductNames = new ArrayList<>(actualProductNames);
         expectedProductNames.sort(Comparator.reverseOrder());
-
         Assert.assertEquals(actualProductNames, expectedProductNames, "The products are not sorted in reverse alphabetical order");
+    }
+
+    @Test(description = "Sorting test (low to high)")
+    public void sortTest2() throws InterruptedException {
+        List<WebElement> priceElementsBeforeSort = loginPage.getPriceElements();
+        List<String> actualPrices = new ArrayList<>();
+        loginPage.selectOption(loginPage.getSortBar(), "Sort by price (low to high)");
+        Thread.sleep(5000);
+        for(WebElement productElement : priceElementsBeforeSort) {
+            String text = productElement.getText();
+            String price = text.replaceAll("[^.0-9]", "");
+            if(price.matches(".*\\d.*")){
+                actualPrices.add(price);
+            }
+        }
+        List<String> expectedPrices = new ArrayList<>(actualPrices);
+        assertEquals(actualPrices, expectedPrices, "The products are not sorted from low to high");
+    }
+
+    @Test(description = "Sorting test (high to low)")
+    public void sortTest3() throws InterruptedException {
+        List<WebElement> priceElements = loginPage.getPriceElements();
+        List<String> actualPrices = new ArrayList<>();
+        loginPage.selectOption(loginPage.getSortBar(), "Sort by price (high to low)");
+        Thread.sleep(5000);
+        for(WebElement productElement : priceElements) {
+            String text = productElement.getText();
+            String price = text.replaceAll("[^.0-9]", "");
+            if(price.matches(".*\\d.*")){
+                actualPrices.add(price);
+            }
+        }
+        List<String> expectedPrices = new ArrayList<>(actualPrices);
+        Assert.assertEquals(actualPrices, expectedPrices, "The products are not sorted from high to low");
     }
 
     @Test(description = "login to HAIVE")
@@ -96,17 +129,13 @@ public class LoginTest extends Hooks {
         wait.until(ExpectedConditions.visibilityOf(loginPage.waitTextBeforeCreatingLocations()));
         loginPage.clickOnCreateLocation();
         wait.until(ExpectedConditions.visibilityOf(loginPage.waitTextAfterCreatingLocations()));
-//        Thread.sleep(2000);
         loginPage.sendKeysWhenReady(loginPage.getName(), "Best of Town");
-//        loginPage.insertLocationName();
         loginPage.insertLocationAddress();
         loginPage.insertLocationCity();
         loginPage.insertLocationPostcode();
-//        wait.until(ExpectedConditions.visibilityOf(loginPage.getLocationButton()));
         ((JavascriptExecutor)driver).executeScript("window.scrollTo(580, 2800);");
         Thread.sleep(5000);
         loginPage.clickOnButtonCreateLocation();
-//        Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOf(loginPage.getNameOfLocation()));
         Thread.sleep(3000);
         assertEquals(loginPage.getNameOfLocation().getText(), "Best of Town");
@@ -154,12 +183,6 @@ public class LoginTest extends Hooks {
         loginPage.clickCreateCategoryButton();
         Thread.sleep(3000);
         loginPage.clickDeleteCategoryButton();
-        Thread.sleep(3000);
-    }
-
-    @Test(description = "Deactivating transparent button")
-    public void deactivatingTransparentButton() throws InterruptedException {
-        loginPage.clickTransparentButton();
         Thread.sleep(3000);
     }
 }

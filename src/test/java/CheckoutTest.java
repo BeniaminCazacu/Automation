@@ -154,25 +154,19 @@ public class CheckoutTest extends Hooks {
     @Test(description = "Compare two smartphones on www.emag.ro")
     public void compareTwoSmartphones() throws InterruptedException {
         checkoutPage.insertTextInSearchBox("google pixel 9 pro");
-        Thread.sleep(1000);
         checkoutPage.clickMainSearchButton();
-        Thread.sleep(1000);
         checkoutPage.clickFirstSmartphone();
-        Thread.sleep(1000);
         checkoutPage.clickCompareCheckbox();
-        Thread.sleep(1000);
         ExtentTestNGITestListener.getTest().log(Status.INFO, "First smartphone is added to comparison");
         checkoutPage.insertTextInSearchBox("samsung galaxy s24 ultra");
-        Thread.sleep(1000);
         checkoutPage.clickMainSearchButton();
         Thread.sleep(10000);//page takes longer to load
         checkoutPage.clickSecondSmartphone();
-        Thread.sleep(1000);
         checkoutPage.clickCompareCheckbox();
-        Thread.sleep(1000);
         ExtentTestNGITestListener.getTest().log(Status.INFO, "Second smartphone is added to comparison");
         checkoutPage.clickCompareButton();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
+        assertEquals(checkoutPage.getHeading().getText(), "Compară produse");
     }
 
     @Test(description = "Add/Delete product to/from favorite on emag")
@@ -194,19 +188,16 @@ public class CheckoutTest extends Hooks {
     @Test(description = "Apply some filters for laptop category on emag")
     public void applyFilters() throws InterruptedException {
         checkoutPage.clickMenu();
-        Thread.sleep(1000);
         checkoutPage.clickLaptopTabletPhoneCategory();
-        Thread.sleep(1000);
         checkoutPage.clickLaptopsAndAccessories();
-        Thread.sleep(1000);
         checkoutPage.clickLaptops();
-        Thread.sleep(1000);
         checkoutPage.insertMinimPrice();
         Thread.sleep(1000);
         checkoutPage.insertMaximPrice();
         Thread.sleep(1000);
         checkoutPage.clickIntervalFilterButton();
         Thread.sleep(5000);
+        assertEquals(checkoutPage.getFilterHeading().getText(), "Laptopuri - Pret: 3.000 - 5.000");
     }
 
     @Test(description = "Remove item from cart and check that is empty")

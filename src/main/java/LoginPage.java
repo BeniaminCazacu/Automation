@@ -112,6 +112,13 @@ public class LoginPage extends BasePage {
         return productElements;
     }
 
+    @FindBy(css = ".card-text")
+    private List<WebElement> priceElements;
+
+    public List<WebElement> getPriceElements() {
+        return priceElements;
+    }
+
     //login to HAIVE
     @FindBy(xpath = "//input[contains(@type, 'email')]")
     private WebElement email;
@@ -377,5 +384,12 @@ public class LoginPage extends BasePage {
 
     public void clickTransparentButton() {
         transparentButton.click();
+    }
+    
+    @FindBy(css = ".card-link")
+    private WebElement miscProduct;
+
+    public WebElement getMiscProduct() {
+        return miscProduct;
     }
 }

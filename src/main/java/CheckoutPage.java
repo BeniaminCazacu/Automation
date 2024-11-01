@@ -256,6 +256,13 @@ public class CheckoutPage extends BasePage {
         compareButton.click();
     }
 
+    @FindBy(xpath = "//h1[text()='Compară produse']")
+    private WebElement heading;
+
+    public WebElement getHeading() {
+        return heading;
+    }
+
     //Add/Delete product to/from favorite on emag
 
     @FindBy(xpath = "//*[contains(@class, 'add-to-favorites btn') and contains(@data-product, 'Telefon mobil Google Pixel 9 Pro, 128GB, 16GB RAM, 5G, Hazel')]")
@@ -341,6 +348,13 @@ public class CheckoutPage extends BasePage {
 
     public void clickIntervalFilterButton() {
         intervalFilterButton.click();
+    }
+
+    @FindBy(xpath = "//h1[text()='Laptopuri - Pret: 3.000 - 5.000']")
+    private WebElement filterHeading;
+
+    public WebElement getFilterHeading() {
+        return filterHeading;
     }
 
     //END of applying some filters for laptop category
