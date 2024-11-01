@@ -305,6 +305,13 @@ public class LoginPage extends BasePage {
         return logoutButton;
     }
 
+    @FindBy(xpath = "//h1[text()='Autentificare']")
+    private WebElement logoutHeading;
+
+    public WebElement getLogoutHeading() {
+        return logoutHeading;
+    }
+
     @FindBy(css = ".text-xl.font-semibold.leading-none.tracking-tight")
     private WebElement getLocationName;
 

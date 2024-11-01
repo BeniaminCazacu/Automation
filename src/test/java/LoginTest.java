@@ -147,6 +147,8 @@ public class LoginTest extends Hooks {
         loginPage.clickLogoutIcon();
         wait.until(ExpectedConditions.visibilityOf(loginPage.getLogoutButton()));
         loginPage.clickLogoutButton();
+        Thread.sleep(2000);
+        assertEquals(loginPage.getLogoutHeading().getText(), "Autentificare");
     }
 
     @Test(description = "Working with dashboard")

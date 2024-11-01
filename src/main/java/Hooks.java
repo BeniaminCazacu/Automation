@@ -53,9 +53,9 @@ public class Hooks {
 
         // Navigating to the specified URL in the browser. 
         // This is the starting point for the tests, loading the web application under test.
-//        driver.get("https://demo.wearehaive.com/ro/solutions/restaurants");
+        driver.get("https://demo.wearehaive.com/ro/solutions/restaurants");
 //        driver.get("https://fasttrackit-test.netlify.app/#/");
-        driver.get("https://www.emag.ro/");
+//        driver.get("https://www.emag.ro/");
         Actions actions = new Actions(driver);
         actions.keyDown(Keys.CONTROL).sendKeys("s").keyUp(Keys.CONTROL).perform();
     }
