@@ -349,6 +349,13 @@ public class LoginPage extends BasePage {
         createMenuSecondButton.click();
     }
 
+    @FindBy(xpath = "//h1[text()='Burgers']")
+    private WebElement checkMenu;
+
+    public WebElement getCheckMenu() {
+        return checkMenu;
+    }
+
     //Adding category to menu in Haive
 
     @FindBy(xpath = "//*[text()='Burgers']")
@@ -379,7 +386,14 @@ public class LoginPage extends BasePage {
         createCategoryButton.click();
     }
 
-    @FindBy(xpath = "(//*[@class='lucide lucide-trash size-4 text-destructive'])[2]")
+    @FindBy(xpath = "//h2[@class='text-lg font-semibold']")
+    private WebElement checkCategory;
+
+    public WebElement getCategory() {
+        return checkCategory;
+    }
+
+    @FindBy(xpath = "//*[@class='lucide lucide-trash size-4 text-destructive']")
     private WebElement deleteCategoryButton;
 
     public void clickDeleteCategoryButton() {

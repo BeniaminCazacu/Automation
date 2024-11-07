@@ -171,6 +171,7 @@ public class LoginTest extends Hooks {
         loginPage.insertMenuName();
         loginPage.clickCreateMenuSecondButton();
         Thread.sleep(3000);
+        assertEquals(loginPage.getCheckMenu().getText(), "Burgers");
     }
 
     @Test(description = "Adding a category to menu and deleting it")
@@ -184,6 +185,7 @@ public class LoginTest extends Hooks {
         loginPage.insertCategoryName();
         loginPage.clickCreateCategoryButton();
         Thread.sleep(3000);
+        assertEquals(loginPage.getCategory().getText(), "Burgeri mexicani (0)");
         loginPage.clickDeleteCategoryButton();
         Thread.sleep(3000);
     }
